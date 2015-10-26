@@ -4,6 +4,9 @@
 
 (function (exports, WPong) {
 
+    /*
+     * DEFAULTS
+     */
     var FIELD_WIDTH = 500;
     var FIELD_HEIGHT = 300;
     var PADDLE_WIDTH = 10;
@@ -11,6 +14,20 @@
     var PADDLE_FIELD_OFFSET = 20;
     var PADDLE_SPEED = 5; // 5 px per frame
     var BALL_RADIUS = 2;
+    /*
+     * GAME STATES
+     */
+    var STATE_IN_PLAY = 'in-play';
+    var STATE_PAUSE = 'pause';
+    var STATE_GAME_OVER = 'game-over';
+    var STATE_INITIAL = 'initial';
+
+    /**
+     * requestAnimationFramePolyfil
+     */
+    var requestAnimationFrame = (function () {
+        return window.requestAnimationFrame;
+    });
 
     /**
      * Limit
@@ -24,6 +41,28 @@
         this.min = min;
         this.max = max;
     }
+
+
+    /**
+     * Canvas Drawer
+     *
+     * @param {Game} game
+     *
+     * @constructor CanvasDrawer
+     */
+    function CanvasDrawer(game) {
+        /**
+         * @type {Game}
+         */
+        this.game = game;
+    }
+
+    /**
+     * Initializes drawer
+     */
+    CanvasDrawer.prototype.init = function () {
+
+    };
 
     /**
      * Game
@@ -46,7 +85,8 @@
             paddleHeight: options.paddleHeight || PADDLE_HEIGHT,
             paddleFieldOffset: options.paddleFieldOffset || PADDLE_FIELD_OFFSET,
             paddleSpeed: options.paddleSpeed || PADDLE_SPEED,
-            ballRadius: options.ballRadius || BALL_RADIUS
+            ballRadius: options.ballRadius || BALL_RADIUS,
+            container: options.container || document.body
         };
         /**
          * @type {null|float}
@@ -56,7 +96,22 @@
          * @type {object}
          */
         this.objects = {};
+        /**
+         * @type {object}
+         */
         this.limits = {};
+        /**
+         * @type {string}
+         */
+        this.state = STATE_INITIAL;
+        /**
+         * @type {null|HTMLCanvasElement}
+         */
+        this.canvas = document.createElement('canvas');
+        /**
+         * @type {CanvasDrawer}
+         */
+        this.drawer = new CanvasDrawer();
 
         // init objects
         this.initField();
@@ -65,7 +120,6 @@
 
         // setup limits
         this.initLimits();
-
     }
 
     // =================================================================================================================
@@ -73,12 +127,37 @@
     // =================================================================================================================
 
     Game.prototype.run = function () {
+        // init canvas
+
+        // run initial state
+        this._stateInitial();
     };
 
-    Game.prototype.playLoop = function (time) {
-        var diff = this.calcTimeDiff(time);
+    Game.prototype._stateInitial = function () {
+        // draw
+    };
 
+    Game.prototype._playLoop = function () {
+        var self = this;
 
+        function loop(time) {
+            var diff = self.calcTimeDiff(time);
+
+            // calc new positions
+
+            // calc collisions
+
+            // recalculate positions if collided
+
+            // draw
+
+            // loop
+            if (self.state == STATE_IN_PLAY) {
+                requestAnimationFrame(loop);
+            }
+        }
+
+        requestAnimationFrame(loop);
     };
 
 
