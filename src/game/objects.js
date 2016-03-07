@@ -1,73 +1,73 @@
 /**
- * Created by Br0wn on 17.10.2015..
+ * Point
+ *
+ * @class Point
  */
-
-(function (exports) {
-
+export class Point {
     /**
-     * Point
-     *
-     * @param {float} x
-     * @param {float} y
+     * @param {float} x Coordinate X
+     * @param {float} y Coordinate Y
      *
      * @constructor Point
      */
-    function Point(x, y) {
+    constructor(x, y) {
         this.x = x;
         this.y = y;
     }
+}
 
+/**
+ * Paddle
+ *
+ * @class Paddle
+ */
+export class Paddle {
     /**
-     * Paddle
-     *
      * @param {Point} position Point of upper left corner
      * @param {int} width
      * @param {int} height
      *
      * @constructor Paddle
      */
-    function Paddle(position, width, height) {
+    constructor(position, width, height) {
         this.position = position;
         this.width = width;
         this.height = height;
     }
+}
 
+/**
+ * Ball
+ *
+ * @class Ball
+ */
+export class Ball {
     /**
-     * Ball
-     *
      * @param {Point} position Center of the ball
      * @param {float} radius
      *
      * @constructor Ball
      */
-    function Ball(position, radius) {
+    constructor(position, radius) {
         this.position = position;
         this.radius = radius;
     }
+}
 
+/**
+ * Field
+ *
+ * @class Field
+ */
+export class Field {
     /**
-     * Field
-     *
      * @param {int} width
      * @param {int} height
      *
      * @constructor Field
      */
-    function Field(width, height) {
+    constructor(width, height) {
         this.width = width;
         this.height = height;
     }
-
-    /**
-     * Export module
-     *
-     * @type {{Point: Point, Paddle: Paddle, Ball: Ball, Field: Field, Game: Game}}
-     */
-    exports.WPong = {
-        Point: Point,
-        Paddle: Paddle,
-        Ball: Ball,
-        Field: Field
-    }
-
-})(window);
+}
